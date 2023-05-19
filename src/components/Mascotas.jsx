@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
-const Home = ({ clientes,setUpdate }) => {
+const Mascotas = ({ clientes,setUpdate }) => {
   const [owners, setOwners] = useState([]); //Este estado almacena un objeto con la informacion de los nuevos propietarios o la informacion para editar un propietario
   const [flagButton, setFlagButton] = useState(false);//Con esta bandera controlo el boton del formulario que se va a mostrar
 
@@ -199,4 +199,4 @@ const Home = ({ clientes,setUpdate }) => {
   );
 };
 
-export default Home;
+export default Mascotas;

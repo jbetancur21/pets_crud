@@ -1,6 +1,9 @@
 import React from "react";
 import Login from "./components/Login"
 import Home from "./components/Home"
+import Menu from "./components/Menu"
+import Mascotas from "./components/Mascotas"
+import Medicamentos from "./components/Medicamentos"
 import { useState } from "react";
 import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
@@ -17,7 +20,7 @@ function App() {
   useEffect(() => {
     console.log("Entré")
     fetch(
-      "https://api-node-pets.herokuapp.com/api_clientes?accesstoken=eyJhbGciOiJIUzI1NiJ9.amJldGFuY3Vy.7eIqVgwsnN46_jXXw0-sPG2pdnh6PLTZesiH7pTWvSM"
+      "http://localhost:9000/api_clientes?accesstoken=eyJhbGciOiJIUzI1NiJ9.amJldGFuY3Vy.7eIqVgwsnN46_jXXw0-sPG2pdnh6PLTZesiH7pTWvSM"
     )
       .then((res) => res.json())
       .then((res) => setClientes(res));
@@ -26,7 +29,7 @@ function App() {
 
   useEffect(() => {
     const getUser = () =>{
-      fetch("https://api-node-pets.herokuapp.com/api/"+user+"?accesstoken=eyJhbGciOiJIUzI1NiJ9.amJldGFuY3Vy.7eIqVgwsnN46_jXXw0-sPG2pdnh6PLTZesiH7pTWvSM")
+      fetch("http://localhost:9000/api/"+user+"?accesstoken=eyJhbGciOiJIUzI1NiJ9.amJldGFuY3Vy.7eIqVgwsnN46_jXXw0-sPG2pdnh6PLTZesiH7pTWvSM")
       .then((res) => res.json())
       .then((res) => setUsuario(res));
     }
@@ -36,10 +39,13 @@ function App() {
   if(flag===true){
     return (
       <div>
-       <Routes>
-          <Route path="/" element={<Home setFlag={setFlag} clientes={clientes} setClientes={setClientes} setUpdate={setUpdate}/>}>
+        <Routes>
+          <Route path="/" element={<Menu setFlag={setFlag} />} >
+            <Route path="/" element={<Home clientes={clientes} setClientes={setClientes} setUpdate={setUpdate} />}></Route>
+            <Route path="/mascotas" element={<Mascotas clientes={clientes} setClientes={setClientes} setUpdate={setUpdate} />}></Route>
+            <Route path="/medicamentos" element={<Medicamentos clientes={clientes} setClientes={setClientes} setUpdate={setUpdate} />}></Route>
           </Route>
-        </Routes> 
+        </Routes>
       </div>
     );
   }else{
